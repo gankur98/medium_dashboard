@@ -19,7 +19,15 @@ jobs:
         run: |
           corepack enable || true
           corepack prepare pnpm@latest --activate || true
-          if command -v pnpm >/dev/null 2>&1; then pnpm install --frozen-lockfile; else npm ci; fi
+          if command -v pnpm >/dev/null 2>&1; then
+            if [ -f pnpm-lock.yaml ]; then
+              pnpm install --frozen-lockfile
+            else
+              pnpm install
+            fi
+          else
+            npm ci
+          fi
       - name: Generate Prisma client
         run: npx prisma generate || true
       - name: Run lint
