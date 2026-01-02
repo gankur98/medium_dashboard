@@ -18,7 +18,7 @@
     "test": "jest --passWithNoTests",
     "test:ci": "jest --runInBand --coverage",
     "smoke:test": "bash scripts/smoke-test.sh",
-    "prepare": "husky install"
+    "prepare": "node -e \"const fs=require('fs'); if(!fs.existsSync('.husky')) require('child_process').execSync('husky install', {stdio:'inherit'})\""
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
