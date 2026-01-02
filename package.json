@@ -17,6 +17,7 @@
     "docker:seed": "pnpm prisma:generate && pnpm run seed",
     "test": "jest --passWithNoTests",
     "test:ci": "jest --runInBand --coverage",
+    "smoke:test": "bash scripts/smoke-test.sh",
     "prepare": "husky install"
   },
   "dependencies": {

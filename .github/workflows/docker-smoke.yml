@@ -1,0 +1,33 @@
+name: Docker Compose Smoke Test
+
+on:
+  workflow_dispatch: {}
+  push:
+    branches:
+      - main
+
+jobs:
+  smoke-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx and QEMU
+        uses: docker/setup-buildx-action@v2
+
+      - name: Start services
+        run: |
+          docker-compose up -d --build
+
+      - name: Install jq
+        run: |
+          sudo apt-get update && sudo apt-get install -y jq
+
+      - name: Run smoke test
+        run: |
+          bash ./scripts/smoke-test.sh localhost 3000 120
+
+      - name: Tear down
+        if: always()
+        run: |
+          docker-compose down -v
