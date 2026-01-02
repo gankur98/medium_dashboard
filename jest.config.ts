@@ -1,10 +1,11 @@
+import nextJest from 'next/jest'
 import type { Config } from '@jest/types'
 
-const config: Config.InitialOptions = {
-  preset: 'ts-jest',
-  testEnvironment: 'jsdom',
+const createJestConfig = nextJest({ dir: './' })
+
+const customJestConfig: Config.InitialOptions = {
   setupFilesAfterEnv: ['<rootDir>/test/setupTests.ts'],
-  testMatch: ['**/?(*.)+(spec|test).[tj]s?(x)']
+  testEnvironment: 'jsdom'
 }
 
-export default config
+export default createJestConfig(customJestConfig)
