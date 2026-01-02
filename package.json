@@ -17,7 +17,8 @@
     "docker:seed": "pnpm prisma:generate && pnpm run seed",
     "test": "jest --passWithNoTests",
     "test:ci": "jest --runInBand --coverage",
-    "prepare": "husky install"
+    "smoke:test": "bash scripts/smoke-test.sh",
+    "prepare": "node -e \"const fs=require('fs'); if(!fs.existsSync('.husky')) require('child_process').execSync('husky install', {stdio:'inherit'})\""
   },
   "dependencies": {
     "@prisma/client": "^5.0.0",
@@ -30,6 +31,7 @@
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^14.0.0",
     "@types/jest": "^29.5.2",
+    "@jest/types": "^29.7.0",
     "@types/node": "^20.5.1",
     "@types/react": "^18.2.21",
     "autoprefixer": "^10.0.0",
