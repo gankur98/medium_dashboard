@@ -1,0 +1,11 @@
+node_modules
+.next
+dist
+coverage
+.env
+.env.local
+.git
+.vscode
+pnpm-lock.yaml
+Dockerfile
+docker-compose.yml
