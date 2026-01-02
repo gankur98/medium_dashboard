@@ -10,7 +10,14 @@ if (typeof globalThis.fetch === 'undefined') {
 if (typeof (globalThis as any).ResizeObserver === 'undefined') {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ;(globalThis as any).ResizeObserver = class {
-    observe() {}
+    cb: any
+    constructor(cb: any) {
+      this.cb = cb
+    }
+    observe(target?: Element) {
+      // call the callback immediately with a plausible size
+      this.cb([{ contentRect: { width: 500, height: 300 } }])
+    }
     unobserve() {}
     disconnect() {}
   }
